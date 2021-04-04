@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: BlocProvider<ColorBloc>(
-            builder: (context) => ColorBloc(), child: MainPage()));
+            create: (context) => ColorBloc(Colors.amber), child: MainPage()));
   }
 }
 
@@ -28,7 +28,7 @@ class MainPage extends StatelessWidget {
           children: <Widget>[
             FloatingActionButton(
               onPressed: () {
-                bloc.dispatch(ColorEvent.to_amber);
+                bloc.add(ColorEvent.to_amber);
               },
               backgroundColor: Colors.amber,
             ),
@@ -37,7 +37,7 @@ class MainPage extends StatelessWidget {
             ),
             FloatingActionButton(
               onPressed: () {
-                bloc.dispatch(ColorEvent.to_light_blue);
+                bloc.add(ColorEvent.to_light_blue);
               },
               backgroundColor: Colors.lightBlue,
             )
@@ -48,7 +48,7 @@ class MainPage extends StatelessWidget {
             builder: (context, currentColor) => AnimatedContainer(
               width: 100,
               height: 100,
-              color: Colors.amber,
+              color: currentColor,
               duration: Duration(milliseconds: 500),
             ),
           ),
